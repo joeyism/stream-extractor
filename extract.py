@@ -15,3 +15,8 @@ def extract_m3u8(url):
     text = get_js(url)
     url = text.split(";")[-3].split("'")[1][:-1]
     return url
+
+if __name__ == "__main__":
+    import sys
+    url = sys.argv[1]
+    print(extract_m3u8(url))
