@@ -5,7 +5,7 @@ import jsbeautifier
 def get_js(url):
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome("./chromedriver", options=options)
     driver.get(url)
     js = [script.get_attribute("innerHTML") for script in driver.find_elements_by_tag_name("script") if "eval" in script.get_attribute("innerHTML")][0]
     beautified_js = jsbeautifier.beautify(js)
