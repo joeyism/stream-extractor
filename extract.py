@@ -45,7 +45,7 @@ def prompt_for_shows(show_url_map):
                 "type": "checkbox",
                 "qmark": "?",
                 "name": "show_name",
-                "message": "Pick a show",
+                "message": "Pick a show:",
                 "choices": [ {"name": show_name} for show_name in show_url_map.keys()]
             }
         ]
@@ -65,8 +65,8 @@ def extract_m3u8(url):
     url = text.split(";")[-3].split("'")[1][:-1]
     return url
 
-def run(url):
-    show_url_map = get_shows(url)
+def run(url, show_type="shows"):
+    show_url_map = get_shows(url, show_type)
     show_url = prompt_for_shows(show_url_map)
     return extract_m3u8(show_url)
 
