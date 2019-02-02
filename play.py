@@ -38,7 +38,3 @@ else:
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, stdin=subprocess.PIPE)
     output, error = process.communicate()
     print(output, error)
-    while True:
-        keyboard_input = input()
-        output, error = process.communicate(keyboard_input)
-        print(output, error)
