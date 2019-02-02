@@ -2,7 +2,7 @@
 import sys
 
 from PyInquirer import style_from_dict, Token, prompt, Separator
-mpv_exists=False
+mpv_exists=True
 try:
     import mpv
 except:
