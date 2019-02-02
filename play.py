@@ -2,10 +2,14 @@
 import sys
 
 from PyInquirer import style_from_dict, Token, prompt, Separator
-import mpv
+mpv_exists=False
+try:
+    import mpv
+except:
+    mpv_exists=False
 
+import prompt as p
 import extract
-
 
 url = sys.argv[1]
 show_types = ["shows", "cable", "movies"]
@@ -17,11 +21,24 @@ questions = [
             "choices": show_types
         }
     ]
-answers = prompt(questions, style=extract.style)
+answers = prompt(questions, style=p.style)
 show_type = answers["show_type"]
 
 m3u8_url = extract.run(url, show_type=show_type)
-player = mpv.MPV(video=False, input_default_bindings=True, input_vo_keyboard=True)
-print("Playing {}".format(m3u8_url))
-player.play(m3u8_url)
-player.wait_for_playback()
+if mpv_exists:
+    player = mpv.MPV(video=False, input_default_bindings=True, input_vo_keyboard=True)
+    print("Playing {}".format(m3u8_url))
+    player.play(m3u8_url)
+    player.wait_for_playback()
+else:
+    bashCommand = "mpv {} --no-video".format(m3u8_url)
+    print("Running ")
+    print(bashCommand)
+    import subprocess
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    output, error = process.communicate()
+    print(output, error)
+    while True:
+        keyboard_input = input()
+        output, error = process.communicate(keyboard_input)
+        print(output, error)
