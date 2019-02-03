@@ -4,3 +4,4 @@ python-mpv
 PyInquirer
 prompt_toolkit==1.0.14
 tqdm
+autochromedriver

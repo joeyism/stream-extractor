@@ -6,7 +6,12 @@ from selenium import webdriver
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
-driver = webdriver.Chrome("./chromedriver", options=options)
+try:
+    driver = webdriver.Chrome(options=options)
+except:
+    import AutoChromedriver
+    AutoChromedriver.download_chromedriver()
+    driver = webdriver.Chrome("./chromedriver", options=options)
 
 def is_alive(driver):
     try:
