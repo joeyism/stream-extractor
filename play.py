@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/env python3
 import sys
 
 from PyInquirer import style_from_dict, Token, prompt, Separator

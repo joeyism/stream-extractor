@@ -9,6 +9,10 @@ options.add_argument("--headless")
 try:
     driver = webdriver.Chrome(options=options)
 except:
+    pass
+try:
+    driver = webdriver.Chrome("./chromedriver", options=options)
+except:
     import AutoChromedriver
     AutoChromedriver.download_chromedriver()
     driver = webdriver.Chrome("./chromedriver", options=options)
